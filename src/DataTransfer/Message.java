@@ -1,7 +1,6 @@
 package DataTransfer;
 
 import java.io.Serializable;
-import java.util.*;
 
 /**
  * Allows for server and clients to talk with each other
@@ -11,9 +10,6 @@ public class Message implements Serializable {
 
     /** Client that sent the message */
     private String sender;
-
-    /** Clients intended to receive the message */
-    private ArrayList<String> receivers = new ArrayList<>();
 
     /** The message being sent over the server */
     private String message = "";
@@ -26,29 +22,23 @@ public class Message implements Serializable {
     /**
      * Constructor for the Message class
      * @param sender- client sending the message
-     * @param receivers- clients intended to receive the message
      * @param message- message being sent to the clients
      */
-    public Message(String sender, ArrayList<String> receivers, String message){
+    public Message(String sender, String message){
         this.sender = sender;
-        this.receivers = receivers;
         this.message = message;
     }
 
     @Override
-    public String toString() {
-        return getMessage();
-    }
+    public String toString() { return getMessage(); }
 
     /////////////////////////////////////////////////////
     //              Getters and Setters
     /////////////////////////////////////////////////////
 
-    public String getSender(){return this.sender;}
+    public String getSender() { return this.sender; }
 
-    public ArrayList<String> getReceivers(){return this.receivers;}
-
-    public String getMessage(){return this.message;}
+    public String getMessage() { return this.message; }
 
     /////////////////////////////////////////////////////
     //               Helper Functions
