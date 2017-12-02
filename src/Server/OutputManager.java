@@ -23,11 +23,11 @@ public class OutputManager {
      * @param message- message being sent to the clients
      */
     static synchronized void sendMessage(Message message){
-        for ( String recipient : message.getReceivers()){
-            try{
+        for ( String recipient : outputs.keySet()){
+            try {
                 outputs.get(recipient).writeObject(message);
                 outputs.get(recipient).flush();
-            }catch (IOException IOex){
+            } catch (IOException IOex) {
                 System.err.print("Sending Message err: " + IOex.getMessage());
             }
         }
