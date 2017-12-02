@@ -93,8 +93,6 @@ public class ClientThread extends Thread {
      * @throws ClassNotFoundException - error in location Message class
      */
     private void startCommunication() throws IOException, ClassNotFoundException {
-        // Receive the name of the client
-        // Message should be clientName, new ArrayList(), ""
         Message message = (Message) inputStream.readObject();
         if ( !message.getMessage().equals("") ){
             System.err.print("Faulty Identifier Message!! Possible false name.");
@@ -107,10 +105,7 @@ public class ClientThread extends Thread {
             System.out.println("Client has been added to the server");
         }
 
-        // Send a message to the client saying the connection has been established
-        ArrayList<String> client= new ArrayList<>(); client.add(clientName);
-        message= new Message("Server", client, "Connection has been established.");
-        OutputManager.sendMessage(message);
+        System.out.println("Connection has been established.");
     }
 
     /////////////////////////////////////////////////////
