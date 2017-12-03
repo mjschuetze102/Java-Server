@@ -4,7 +4,6 @@ import DataTransfer.Message;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
 /**
  * Thread allowing for communication to/from clients
@@ -16,13 +15,10 @@ public class ClientThread extends Thread {
     private Socket socket;
 
     /** Client identifier (used to distinguish clients) */
-    private String clientName;
+    private String clientIdentifier;
 
     /** Handles communication from the client */
     private ObjectInputStream inputStream;
-
-    /** Handles communication to the client */
-    private ObjectOutputStream outputStream;
 
     /////////////////////////////////////////////////////
     //              Class Functionality
@@ -37,12 +33,11 @@ public class ClientThread extends Thread {
     /**
      * Loops the communication with the client until connection has been broken
      */
-    public void run(){
+    public void run() {
         // Catch IO exception due to improper socket connection
         try {
             // Gets the means to communicate with the client
             inputStream = new ObjectInputStream(socket.getInputStream());
-            outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             // Catch CNF exception due to the Message class not being found
             try {
@@ -66,9 +61,7 @@ public class ClientThread extends Thread {
                 System.err.println("Could not find Message class");
             } catch (IOException io) {
                 // Close the communication line to the dropped client
-                inputStream.close();
-                OutputManager.removeOutput(clientName);
-                socket.close();
+                closeConnection();
 
                 // Display that the socket and streams has been closed
                 System.out.println("Streams and socket have been closed");
@@ -94,11 +87,12 @@ public class ClientThread extends Thread {
      */
     private void startCommunication() throws IOException, ClassNotFoundException {
         Message message = (Message) inputStream.readObject();
-        if ( !message.getMessage().equals("") ){
+        if ( !message.getMessage().equals("") ) {
             System.err.print("Faulty Identifier Message!! Possible false name.");
-        }else {
+        } else {
             // Add the client to the ClientList
-            clientName= message.getSender();
+            clientIdentifier= message.getSender();
+            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
             OutputManager.addOutput(message.getSender(), outputStream);
 
             // Display that the Client has been added to the ClientList
@@ -106,6 +100,21 @@ public class ClientThread extends Thread {
         }
 
         System.out.println("Connection has been established.");
+    }
+
+    /**
+     * Closes the connection between server and client
+     */
+    private void closeConnection() {
+        System.out.println("Closing connection.");
+
+        try{
+            OutputManager.removeOutput(clientIdentifier);
+            inputStream.close();
+            socket.close();
+        }catch (IOException IOex){
+            System.err.print("\nIOex Client-closeClient: " + IOex.getMessage());
+        }
     }
 
     /////////////////////////////////////////////////////

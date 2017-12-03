@@ -1,9 +1,7 @@
 package Server;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.io.*;
+import java.net.*;
 
 /**
  * Runs the server allowing for clients to connect
@@ -39,12 +37,12 @@ public class Server {
             while (true) {
                 try {
                     waitForConnection();
-                    setupCommunicationThread();
+                    startCommunication();
                 } catch (EOFException eof) {
                     System.err.print("Server Connection Ended");
                 }
             }
-        } catch(IOException io){
+        } catch(IOException io) {
             io.printStackTrace();
         }
     }
@@ -69,10 +67,10 @@ public class Server {
     }
 
     /**
-     * Sets up the send/receive streams for communication to the client
+     * Sets up the send/receive streams for communication with the client
      * @throws IOException - error in connecting to socket
      */
-    private void setupCommunicationThread() throws IOException {
+    private void startCommunication() throws IOException {
         // Sets up the output stream to send data and flushes out data
         ClientThread thread = new ClientThread(socket);
         thread.start();
@@ -85,7 +83,7 @@ public class Server {
     //               Testing Purposes
     /////////////////////////////////////////////////////
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Server server = new Server();
         server.run();
     }
