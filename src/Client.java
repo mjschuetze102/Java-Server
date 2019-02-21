@@ -48,7 +48,7 @@ public abstract class Client implements ConnectionEndpoint {
      * Provide functionality for sending messages over the client-server connection
      * @param messageContents - contents for the Message to be sent over the client-server connection
      */
-    public void sendMessage(HashMap<String, Object> messageContents) {
+    protected void sendMessage(HashMap<String, Object> messageContents) {
         // TODO Implement outputManager.sendMessage();
     }
 
