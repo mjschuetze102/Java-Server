@@ -3,6 +3,7 @@ import java.net.ServerSocket;
 import java.util.HashMap;
 
 /**
+ * Represents the ConnectionEndpoint for the server end
  * Written by Michael Schuetze on 2/21/2019.
  */
 public abstract class Server implements ConnectionEndpoint {
@@ -11,6 +12,7 @@ public abstract class Server implements ConnectionEndpoint {
     private OutputManager outputManager;
 
     /**
+     * Initializes the server half of the connection
      * @param maxUsers - the maximum numbers of users who can use the server at once
      * @param port - the port number the server is listening on
      */

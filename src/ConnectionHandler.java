@@ -18,7 +18,7 @@ public class ConnectionHandler {
     private Server server;
 
     /**
-     * Initializes the server half of the connection
+     * Initializes the class that will create connections to the clients
      * @param server - the ConnectionEndpoint the input and output managers will communicate with
      * @param serverSocket - the socket communication will happen over
      */
