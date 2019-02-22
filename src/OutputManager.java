@@ -29,10 +29,6 @@ public class OutputManager {
         }
     }
 
-    public void closeConnection() {
-
-    }
-
     /////////////////////////////////////////////////////
     //              Getters and Setters
     /////////////////////////////////////////////////////
