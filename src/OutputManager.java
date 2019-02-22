@@ -19,6 +19,7 @@ public class OutputManager {
      * @param recipients - ObjectOutStream for the ConnectionEndpoint
      */
     public synchronized void sendMessage(Message message, ObjectOutputStream[] recipients) {
+        // TODO: Convert HashMap<String, Object> to Message
         for ( ObjectOutputStream recipient : recipients) {
             try {
                 recipient.writeObject(message);

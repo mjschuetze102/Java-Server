@@ -1,5 +1,7 @@
 import DataTransfer.Message;
 
+import java.util.HashMap;
+
 /**
  * Abstracts out common functionality between client and server
  * Written by Michael Schuetze on 2/18/2019.
@@ -12,15 +14,15 @@ public interface ConnectionEndpoint {
 
     /**
      * Provide functionality for receiving messages over the client-server connection
-     * @param message- Message being sent over the client-server connection
+     * @param messageContents - contents for the Message received over the client-server connection
      */
-    void receiveMessage(Message message);
+    void receiveMessage(HashMap<String, Object> messageContents);
 
     /**
      * Provide functionality for sending messages over the client-server connection
-     * @param messageComponents- Components for the Message to be sent over the client-server connection
+     * @param messageContents - contents for the Message to be sent over the client-server connection
      */
-    void sendMessage(Message message);
+    void sendMessage(HashMap<String, Object> messageContents);
 
     /**
      * Closes the connection to the other endpoint

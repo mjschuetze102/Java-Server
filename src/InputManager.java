@@ -47,6 +47,7 @@ public class InputManager extends Thread {
 
                 // Send message to the ConnectionEndpoint
                 endpoint.receiveMessage(message);
+                // TODO: Convert Message to HashMap<String, Object>
 
             } while (true);
 
