@@ -11,17 +11,20 @@ public class CollectionManager {
     /** A collection of output streams for clients connected to the server **/
     static private HashMap<Integer, ObjectOutputStream> clients = new HashMap<>();
 
+    /** Counter to keep track of which unique ID to give to the next client to connect **/
+    static private int nextID = 1; // Starts at 1 so that 0 can represent server on the client side
+
     /////////////////////////////////////////////////////
     //              Class Functionality
     /////////////////////////////////////////////////////
 
     /**
      * Store the output stream for the client
-     * @param clientID - the client whose output is being stored
      * @param outputStream - the output stream to send information to the client
      */
-    static synchronized void addOutput(int clientID, ObjectOutputStream outputStream){
-        clients.put(clientID, outputStream);
+    static synchronized int addOutput(ObjectOutputStream outputStream) {
+        clients.put(nextID, outputStream);
+        return nextID++;
     }
 
     /**

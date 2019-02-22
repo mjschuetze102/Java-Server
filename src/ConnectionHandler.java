@@ -45,8 +45,8 @@ public class ConnectionHandler {
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
                 // Creates the Input and Output Managers for the client
-                new InputManager(server, inputStream);
-                // TODO: Create a class that stores the outputStreams
+                int clientID = CollectionManager.addOutput(outputStream);
+                new InputManager(server, inputStream, clientID);
             } catch (EOFException EOFex) {
                 System.out.println("[INFO] Server Connection Ended");
             } catch (IOException IOex) {

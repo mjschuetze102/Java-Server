@@ -16,14 +16,19 @@ public class InputManager extends Thread {
     /** The endpoint which receives data from the inputManager **/
     private ConnectionEndpoint endpoint;
 
+    /** The unique identifier for a client **/
+    private int clientID;
+
     /**
      * Initialize the thread that collects data for the ConnectionEndpoint
      * @param endpoint - the endpoint which will get the data the InputManager receives
      * @param inputStream - the input stream for receiving data
+     * @param clientID - used for the server to know who sent the message
      */
-    public InputManager(ConnectionEndpoint endpoint, ObjectInputStream inputStream) {
+    public InputManager(ConnectionEndpoint endpoint, ObjectInputStream inputStream, int clientID) {
         this.endpoint= endpoint;
         this.input = inputStream;
+        this.clientID = clientID;
     }
 
     /////////////////////////////////////////////////////
@@ -43,7 +48,7 @@ public class InputManager extends Thread {
                 // Send message to the ConnectionEndpoint
                 endpoint.receiveMessage(message);
 
-            }while (true);
+            } while (true);
 
         }catch (ClassNotFoundException CNFex){
             System.out.println("[ERROR] Could Not Find Message");
@@ -65,11 +70,11 @@ public class InputManager extends Thread {
     /**
      * Closes the input stream
      */
-    public void close() {
-        try{
+    private void close() {
+        try {
             input.close();
             System.out.println("[INFO] Successfully Closed Connection");
-        }catch (IOException IOex){
+        } catch (IOException IOex){
             System.out.println("[ERROR] Did Not Close Connection Properly");
         }
     }

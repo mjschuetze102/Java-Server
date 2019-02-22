@@ -27,7 +27,7 @@ public abstract class Client implements ConnectionEndpoint {
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             // Creates the Input and Output Managers for the client
-            new InputManager(this, inputStream);
+            new InputManager(this, inputStream, 0);
             this.outputManager = new OutputManager();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Connection");
