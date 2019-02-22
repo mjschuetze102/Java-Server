@@ -18,7 +18,7 @@ public class OutputManager {
      * @param message - message being sent to the recipients
      * @param recipients - ObjectOutStream for the ConnectionEndpoint
      */
-    static synchronized void sendMessage(Message message, ObjectOutputStream[] recipients) {
+    public synchronized void sendMessage(Message message, ObjectOutputStream[] recipients) {
         for ( ObjectOutputStream recipient : recipients) {
             try {
                 recipient.writeObject(message);
@@ -28,4 +28,20 @@ public class OutputManager {
             }
         }
     }
+
+    public void closeConnection() {
+
+    }
+
+    /////////////////////////////////////////////////////
+    //              Getters and Setters
+    /////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////
+    //               Helper Functions
+    /////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////
+    //               Testing Purposes
+    /////////////////////////////////////////////////////
 }

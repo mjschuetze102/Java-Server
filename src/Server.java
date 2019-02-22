@@ -46,6 +46,14 @@ public abstract class Server implements ConnectionEndpoint {
         // TODO Implement outputManager.sendMessage();
     }
 
+    /**
+     * Closes the connection to the other endpoint
+     * @param clientID - unique identifier to figure out what connection to close
+     */
+    public void closeConnection(int clientID) {
+        ConnectionManager.removeOutput(clientID);
+    }
+
     /////////////////////////////////////////////////////
     //              Getters and Setters
     /////////////////////////////////////////////////////

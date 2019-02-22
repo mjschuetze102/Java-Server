@@ -22,6 +22,12 @@ public interface ConnectionEndpoint {
      */
     void sendMessage(Message message);
 
+    /**
+     * Closes the connection to the other endpoint
+     * @param clientID - ID to establish which connection to close
+     */
+    void closeConnection(int clientID);
+
     /////////////////////////////////////////////////////
     //              Getters and Setters
     /////////////////////////////////////////////////////

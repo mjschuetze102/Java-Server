@@ -6,7 +6,7 @@ import java.util.HashMap;
  * Stores the output streams for all of the connected clients
  * Written by Michael Schuetze on 2/21/2019.
  */
-public class CollectionManager {
+public class ConnectionManager {
 
     /** A collection of output streams for clients connected to the server **/
     static private HashMap<Integer, ObjectOutputStream> clients = new HashMap<>();
@@ -29,6 +29,7 @@ public class CollectionManager {
 
     /**
      * Remove the output stream for the client
+     * Also closes the connection
      * @param clientID - the client whose output is being removed
      */
     static synchronized void removeOutput(int clientID){

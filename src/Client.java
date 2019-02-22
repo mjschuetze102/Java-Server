@@ -25,6 +25,7 @@ public abstract class Client implements ConnectionEndpoint {
             // Create the input and output streams for the connection
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
+            // TODO: Figure out how outputStream is being stored client side
 
             // Creates the Input and Output Managers for the client
             new InputManager(this, inputStream, 0);
@@ -50,6 +51,14 @@ public abstract class Client implements ConnectionEndpoint {
      */
     protected void sendMessage(HashMap<String, Object> messageContents) {
         // TODO Implement outputManager.sendMessage();
+    }
+
+    /**
+     * Closes the connection to the other endpoint
+     * @param clientID - unique identifier to figure out what connection to close
+     */
+    public void closeConnection(int clientID) {
+        // TODO: Close the outputStream connection
     }
 
     /////////////////////////////////////////////////////

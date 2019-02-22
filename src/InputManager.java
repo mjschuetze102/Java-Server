@@ -53,7 +53,7 @@ public class InputManager extends Thread {
         }catch (ClassNotFoundException CNFex){
             System.out.println("[ERROR] Could Not Find Message");
         }catch (EOFException EOFex){
-            close();
+            closeConnection();
         } catch (IOException IOex){
             System.out.println("[ERROR] Did Not Receive Message Successfully");
         }
@@ -70,7 +70,9 @@ public class InputManager extends Thread {
     /**
      * Closes the input stream
      */
-    private void close() {
+    private void closeConnection() {
+        endpoint.closeConnection(clientID);
+
         try {
             input.close();
             System.out.println("[INFO] Successfully Closed Connection");
