@@ -12,6 +12,9 @@ public abstract class Client implements ConnectionEndpoint {
     /** Manager that handles sending output **/
     private OutputManager outputManager;
 
+    /** Stream used to send information to the server **/
+    private ObjectOutputStream outputStream;
+
     /**
      * Initializes the client half of the connection
      * @param ipAddress - address the server is running at
@@ -24,8 +27,7 @@ public abstract class Client implements ConnectionEndpoint {
 
             // Create the input and output streams for the connection
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-            ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-            // TODO: Figure out how outputStream is being stored client side
+            this.outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             // Creates the Input and Output Managers for the client
             new InputManager(this, inputStream, 0);
@@ -50,7 +52,7 @@ public abstract class Client implements ConnectionEndpoint {
      * @param messageContents - contents for the Message to be sent over the client-server connection
      */
     public void sendMessage(HashMap<String, Object> messageContents) {
-        // TODO Implement outputManager.sendMessage();
+        outputManager.sendMessage(messageContents, new ObjectOutputStream[]{outputStream});
     }
 
     /**
@@ -58,7 +60,12 @@ public abstract class Client implements ConnectionEndpoint {
      * @param clientID - unique identifier to figure out what connection to close
      */
     public void closeConnection(int clientID) {
-        // TODO: Close the outputStream connection
+        try {
+            outputStream.close();
+            System.out.println("[INFO] Successfully Closed Connection");
+        } catch (IOException IOex){
+            System.out.println("[ERROR] Did Not Close Connection Properly");
+        }
     }
 
     /////////////////////////////////////////////////////
