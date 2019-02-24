@@ -1,3 +1,10 @@
+package ServerSide;
+
+import Communication.ConnectionEndpoint;
+import Communication.OutputManager;
+import ServerSide.ConnectionHandler;
+import ServerSide.ConnectionManager;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;

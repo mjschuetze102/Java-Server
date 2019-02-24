@@ -1,4 +1,4 @@
-import DataTransfer.Message;
+package Communication;
 
 import java.util.HashMap;
 

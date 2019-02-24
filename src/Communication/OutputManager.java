@@ -1,3 +1,5 @@
+package Communication;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
