@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.util.HashMap;
 
@@ -41,9 +42,28 @@ public abstract class Server implements ConnectionEndpoint {
     /**
      * Provide functionality for sending messages over the client-server connection
      * @param messageContents - contents for the Message to be sent over the client-server connection
+     * @param clients - list of unique IDs for the clients the message will be sent to
      */
-    public void sendMessage(HashMap<String, Object> messageContents) {
-        // TODO Implement outputManager.sendMessage();
+    public void sendMessage(HashMap<String, Object> messageContents, int[] clients) {
+        // List of endpoints to send the information to
+        ObjectOutputStream[] recipients = new ObjectOutputStream[clients.length] ;
+
+        // Get the list of output streams to send message over
+        for (int index = 0; index < clients.length; index++) {
+            recipients[index] = ConnectionManager.getSpecificClientOutput(clients[index]);
+        }
+
+        // Send the message to the clients
+        outputManager.sendMessage(messageContents, recipients);
+    }
+
+    /**
+     * Provide functionality for sending messages to all the clients
+     * @param messageContents - contents for the Message to be sent over the client-server connection
+     */
+    public void sendMessageToAll(HashMap<String, Object> messageContents) {
+        // Send the message to the clients
+        outputManager.sendMessage(messageContents, ConnectionManager.getAllClientOutputs());
     }
 
     /**
