@@ -1,7 +1,6 @@
-import DataTransfer.Message;
-
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.HashMap;
 
 /**
  * Handles all operations for sending data to a ConnectionEndpoint
@@ -15,11 +14,12 @@ public class OutputManager {
 
     /**
      * Sends a message to a list of recipients
-     * @param message - message being sent to the recipients
+     * @param messageContents - contents of the message being sent to the recipients
      * @param recipients - ObjectOutStream for the ConnectionEndpoint
      */
-    public synchronized void sendMessage(Message message, ObjectOutputStream[] recipients) {
-        // TODO: Convert HashMap<String, Object> to Message
+    public synchronized void sendMessage(HashMap<String, Object> messageContents, ObjectOutputStream[] recipients) {
+        Message message = new Message(messageContents);
+
         for ( ObjectOutputStream recipient : recipients) {
             try {
                 recipient.writeObject(message);

@@ -1,5 +1,3 @@
-import DataTransfer.Message;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -11,7 +9,7 @@ import java.io.ObjectInputStream;
 public class InputManager extends Thread {
 
     /** Stream used to collect data for the ConnectionEndpoint **/
-    private ObjectInputStream input;
+    private ObjectInputStream inputStream;
 
     /** The endpoint which receives data from the inputManager **/
     private ConnectionEndpoint endpoint;
@@ -27,7 +25,7 @@ public class InputManager extends Thread {
      */
     public InputManager(ConnectionEndpoint endpoint, ObjectInputStream inputStream, int clientID) {
         this.endpoint= endpoint;
-        this.input = inputStream;
+        this.inputStream = inputStream;
         this.clientID = clientID;
     }
 
@@ -41,16 +39,13 @@ public class InputManager extends Thread {
     @Override
     public void run(){
         try {
-            do {
+            while (true) {
                 // Receive Message
-                Message message = (Message) input.readObject();
+                Message message = (Message) inputStream.readObject();
 
                 // Send message to the ConnectionEndpoint
-                endpoint.receiveMessage(message);
-                // TODO: Convert Message to HashMap<String, Object>
-
-            } while (true);
-
+                endpoint.receiveMessage(message.getContents());
+            }
         }catch (ClassNotFoundException CNFex){
             System.out.println("[ERROR] Could Not Find Message");
         }catch (EOFException EOFex){
@@ -75,7 +70,7 @@ public class InputManager extends Thread {
         endpoint.closeConnection(clientID);
 
         try {
-            input.close();
+            inputStream.close();
             System.out.println("[INFO] Successfully Closed Connection");
         } catch (IOException IOex){
             System.out.println("[ERROR] Did Not Close Connection Properly");
