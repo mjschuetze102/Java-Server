@@ -15,6 +15,9 @@ public abstract class Client implements ConnectionEndpoint {
     /** Stream used to send information to the server **/
     private ObjectOutputStream outputStream;
 
+    /** Stream used to send information to the server **/
+    private Socket socket;
+
     /**
      * Initializes the client half of the connection
      * @param ipAddress - address the server is running at
@@ -23,15 +26,15 @@ public abstract class Client implements ConnectionEndpoint {
     public Client(String ipAddress, int port) {
         try {
             // Create the communication line between endpoints
-            Socket socket = new Socket(InetAddress.getByName(ipAddress), port);
+            socket = new Socket(InetAddress.getByName(ipAddress), port);
 
             // Create the input and output streams for the connection
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-            this.outputStream = new ObjectOutputStream(socket.getOutputStream());
+            outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             // Creates the Input and Output Managers for the client
             new InputManager(this, inputStream, 0);
-            this.outputManager = new OutputManager();
+            outputManager = new OutputManager();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Connection");
         }
@@ -62,6 +65,7 @@ public abstract class Client implements ConnectionEndpoint {
     public void closeConnection(int clientID) {
         try {
             outputStream.close();
+            socket.close();
             System.out.println("[INFO] Successfully Closed Connection");
         } catch (IOException IOex){
             System.out.println("[ERROR] Did Not Close Connection Properly");

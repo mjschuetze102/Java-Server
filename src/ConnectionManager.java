@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
 import java.util.HashMap;
 
 /**
@@ -11,6 +12,9 @@ public class ConnectionManager {
     /** A collection of output streams for clients connected to the server **/
     static private HashMap<Integer, ObjectOutputStream> clients = new HashMap<>();
 
+    /** A collection of sockets for clients connected to the server **/
+    static private HashMap<Integer, Socket> sockets = new HashMap<>();
+
     /** Counter to keep track of which unique ID to give to the next client to connect **/
     static private int nextID = 1; // Starts at 1 so that 0 can represent server on the client side
 
@@ -21,9 +25,11 @@ public class ConnectionManager {
     /**
      * Store the output stream for the client
      * @param outputStream - the output stream to send information to the client
+     * @param socket - the socket the connection is taking place on
      */
-    static synchronized int addOutput(ObjectOutputStream outputStream) {
+    static synchronized int addOutput(ObjectOutputStream outputStream, Socket socket) {
         clients.put(nextID, outputStream);
+        sockets.put(nextID, socket);
         return nextID++;
     }
 
@@ -35,10 +41,12 @@ public class ConnectionManager {
     static synchronized void removeOutput(int clientID){
         try{
             clients.get(clientID).close();
+            sockets.get(clientID).close();
         }catch (IOException IOex){
             System.out.println("[ERROR] Did Not Close Connection Properly");
         } finally {
             clients.remove(clientID);
+            sockets.remove(clientID);
         }
     }
 
