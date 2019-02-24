@@ -19,12 +19,6 @@ public interface ConnectionEndpoint {
     void receiveMessage(HashMap<String, Object> messageContents);
 
     /**
-     * Provide functionality for sending messages over the client-server connection
-     * @param messageContents - contents for the Message to be sent over the client-server connection
-     */
-    void sendMessage(HashMap<String, Object> messageContents);
-
-    /**
      * Closes the connection to the other endpoint
      * @param clientID - ID to establish which connection to close
      */

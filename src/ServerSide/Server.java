@@ -51,7 +51,7 @@ public abstract class Server implements ConnectionEndpoint {
      * @param messageContents - contents for the Message to be sent over the client-server connection
      * @param clients - list of unique IDs for the clients the message will be sent to
      */
-    public void sendMessage(HashMap<String, Object> messageContents, int[] clients) {
+    protected void sendMessage(HashMap<String, Object> messageContents, int[] clients) {
         // List of endpoints to send the information to
         ObjectOutputStream[] recipients = new ObjectOutputStream[clients.length] ;
 
@@ -68,7 +68,7 @@ public abstract class Server implements ConnectionEndpoint {
      * Provide functionality for sending messages to all the clients
      * @param messageContents - contents for the Message to be sent over the client-server connection
      */
-    public void sendMessageToAll(HashMap<String, Object> messageContents) {
+    protected void sendMessageToAll(HashMap<String, Object> messageContents) {
         // Send the message to the clients
         outputManager.sendMessage(messageContents, ConnectionManager.getAllClientOutputs());
     }
