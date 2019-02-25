@@ -46,7 +46,7 @@ public class InputManager extends Thread {
                 Message message = (Message) inputStream.readObject();
 
                 // Send message to the ConnectionEndpoint
-                endpoint.receiveMessage(message.getContents());
+                endpoint.receiveMessage(message.getContents(), clientID);
             }
         }catch (ClassNotFoundException CNFex){
             System.out.println("[ERROR] Could Not Find Message");
