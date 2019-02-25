@@ -24,12 +24,12 @@ public abstract class Server implements ConnectionEndpoint {
      * @param maxUsers - the maximum numbers of users who can use the server at once
      * @param port - the port number the server is listening on
      */
-    public Server(int maxUsers, int port) {
+    public Server(int maxQueuedUsers, int port) {
         this.outputManager = new OutputManager();
 
         try {
             // Create a server socket
-            ServerSocket serverSocket = new ServerSocket(port, maxUsers);
+            ServerSocket serverSocket = new ServerSocket(port, maxQueuedUsers);
             (new ConnectionHandler(this, serverSocket)).start();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Server");
