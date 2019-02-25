@@ -7,7 +7,7 @@ import java.util.HashMap;
  * Allows for server and clients to talk with each other
  * Written by Michael Schuetze on 2/24/2019.
  */
-public class Message implements Serializable {
+class Message implements Serializable {
 
     /** The information being sent over the socket **/
     private HashMap<String, Object> contents;
@@ -16,7 +16,7 @@ public class Message implements Serializable {
      * Creates a new message with the information to send
      * @param messageContents - contents of the message being sent to the recipients
      */
-    public Message(HashMap<String, Object> messageContents){
+    Message(HashMap<String, Object> messageContents){
         this.contents = messageContents;
     }
 
@@ -24,7 +24,7 @@ public class Message implements Serializable {
     //              Getters and Setters
     /////////////////////////////////////////////////////
 
-    public HashMap<String, Object> getContents() { return this.contents; }
+    HashMap<String, Object> getContents() { return this.contents; }
 
     /////////////////////////////////////////////////////
     //              Getters and Setters

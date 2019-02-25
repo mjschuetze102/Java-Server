@@ -35,12 +35,12 @@ public abstract class Client implements ConnectionEndpoint {
             socket = new Socket(InetAddress.getByName(ipAddress), port);
 
             // Create the input and output streams for the connection
-            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
             // Creates the Input and Output Managers for the client
-            (new InputManager(this, inputStream, 0)).start();
             outputManager = new OutputManager();
+            (new InputManager(this, inputStream, 0)).start();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Connection");
         }
@@ -72,8 +72,8 @@ public abstract class Client implements ConnectionEndpoint {
         try {
             outputStream.close();
             socket.close();
-            System.out.println("[INFO] Successfully Closed Connection");
-        } catch (IOException IOex){
+            System.out.println("[INFO] No Longer Sending Output To Client " + clientID);
+        } catch (IOException IOex) {
             System.out.println("[ERROR] Did Not Close Connection Properly");
         }
     }

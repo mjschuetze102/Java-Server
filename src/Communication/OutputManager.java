@@ -27,7 +27,7 @@ public class OutputManager {
                 recipient.writeObject(message);
                 recipient.flush();
             } catch (IOException IOex) {
-                System.out.println("[ERROR] Could Not Send Message:\n\t" + message.toString());
+                System.out.println("[ERROR] Could Not Send Message");
             }
         }
     }

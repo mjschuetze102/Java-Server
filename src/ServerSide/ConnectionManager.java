@@ -40,11 +40,12 @@ public class ConnectionManager {
      * Also closes the connection
      * @param clientID - the client whose output is being removed
      */
-    static synchronized void removeOutput(int clientID){
-        try{
+    static synchronized void removeOutput(int clientID) {
+        try {
             clients.get(clientID).close();
             sockets.get(clientID).close();
-        }catch (IOException IOex){
+            System.out.println("[INFO] No Longer Sending Output To Client " + clientID);
+        } catch (IOException IOex) {
             System.out.println("[ERROR] Did Not Close Connection Properly");
         } finally {
             clients.remove(clientID);
@@ -69,8 +70,8 @@ public class ConnectionManager {
      * Get the output streams for all clients connected to the server
      * @return array of OutputStreams for all clients
      */
-    static synchronized ObjectOutputStream[] getAllClientOutputs(){
-        return (ObjectOutputStream[]) clients.values().toArray();
+    static synchronized ObjectOutputStream[] getAllClientOutputs() {
+        return clients.values().toArray(new ObjectOutputStream[0]);
     }
 
     /////////////////////////////////////////////////////
