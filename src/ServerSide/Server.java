@@ -30,7 +30,7 @@ public abstract class Server implements ConnectionEndpoint {
         try {
             // Create a server socket
             ServerSocket serverSocket = new ServerSocket(port, maxUsers);
-            new ConnectionHandler(this, serverSocket);
+            (new ConnectionHandler(this, serverSocket)).start();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Server");
         }
