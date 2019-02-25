@@ -21,7 +21,7 @@ public abstract class Server implements ConnectionEndpoint {
 
     /**
      * Initializes the server half of the connection
-     * @param maxUsers - the maximum numbers of users who can use the server at once
+     * @param maxQueuedUsers - the maximum numbers of users who can use the server at once
      * @param port - the port number the server is listening on
      */
     public Server(int maxQueuedUsers, int port) {
