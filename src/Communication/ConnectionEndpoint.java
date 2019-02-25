@@ -15,6 +15,7 @@ public interface ConnectionEndpoint {
     /**
      * Provide functionality for receiving messages over the client-server connection
      * @param messageContents - contents for the Message received over the client-server connection
+     * @param clientID - unique identifier for who sent the message
      */
     void receiveMessage(HashMap<String, Object> messageContents, int clientID);
 

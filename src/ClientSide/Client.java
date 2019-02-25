@@ -53,6 +53,7 @@ public abstract class Client implements ConnectionEndpoint {
     /**
      * Provide functionality for receiving messages over the client-server connection
      * @param messageContents - contents for the Message received over the client-server connection
+     * @param clientID - unique identifier for who sent the message
      */
     public abstract void receiveMessage(HashMap<String, Object> messageContents, int clientID);
 
