@@ -39,7 +39,7 @@ public abstract class Client implements ConnectionEndpoint {
             outputStream = new ObjectOutputStream(socket.getOutputStream());
 
             // Creates the Input and Output Managers for the client
-            new InputManager(this, inputStream, 0);
+            (new InputManager(this, inputStream, 0)).start();
             outputManager = new OutputManager();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Connection");
@@ -54,13 +54,13 @@ public abstract class Client implements ConnectionEndpoint {
      * Provide functionality for receiving messages over the client-server connection
      * @param messageContents - contents for the Message received over the client-server connection
      */
-    public abstract void receiveMessage(HashMap<String, Object> messageContents);
+    public abstract void receiveMessage(HashMap<String, Object> messageContents, int clientID);
 
     /**
      * Provide functionality for sending messages over the client-server connection
      * @param messageContents - contents for the Message to be sent over the client-server connection
      */
-    public void sendMessage(HashMap<String, Object> messageContents) {
+    protected void sendMessage(HashMap<String, Object> messageContents) {
         outputManager.sendMessage(messageContents, new ObjectOutputStream[]{outputStream});
     }
 

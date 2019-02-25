@@ -13,7 +13,7 @@ import java.net.Socket;
  * Handles setting up a connection to the client
  * Written by Michael Schuetze on 2/21/2019.
  */
-public class ConnectionHandler {
+public class ConnectionHandler extends Thread {
 
     /** Socket which all communication to the server will happen over **/
     private ServerSocket serverSocket;
@@ -50,7 +50,7 @@ public class ConnectionHandler {
 
                 // Creates the Input and Output Managers for the client
                 int clientID = ConnectionManager.addOutput(outputStream, socket);
-                new InputManager(server, inputStream, clientID);
+                (new InputManager(server, inputStream, clientID)).start();
             } catch (EOFException EOFex) {
                 System.out.println("[INFO] Server Connection Ended");
             } catch (IOException IOex) {

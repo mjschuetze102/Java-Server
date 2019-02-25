@@ -30,7 +30,7 @@ public abstract class Server implements ConnectionEndpoint {
         try {
             // Create a server socket
             ServerSocket serverSocket = new ServerSocket(port, maxUsers);
-            new ConnectionHandler(this, serverSocket);
+            (new ConnectionHandler(this, serverSocket)).start();
         } catch (IOException IOex) {
             System.out.println("[ERROR] Could Not Establish Server");
         }
@@ -44,7 +44,7 @@ public abstract class Server implements ConnectionEndpoint {
      * Provide functionality for receiving messages over the client-server connection
      * @param messageContents - contents for the Message received over the client-server connection
      */
-    public abstract void receiveMessage(HashMap<String, Object> messageContents);
+    public abstract void receiveMessage(HashMap<String, Object> messageContents, int clientID);
 
     /**
      * Provide functionality for sending messages over the client-server connection
