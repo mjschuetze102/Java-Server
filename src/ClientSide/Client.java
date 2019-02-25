@@ -35,8 +35,8 @@ public abstract class Client implements ConnectionEndpoint {
             socket = new Socket(InetAddress.getByName(ipAddress), port);
 
             // Create the input and output streams for the connection
-            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
             outputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
 
             // Creates the Input and Output Managers for the client
             (new InputManager(this, inputStream, 0)).start();
