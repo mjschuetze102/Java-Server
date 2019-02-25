@@ -72,7 +72,7 @@ public abstract class Client implements ConnectionEndpoint {
         try {
             outputStream.close();
             socket.close();
-            System.out.println("[INFO] Successfully Closed Connection");
+            System.out.println("[INFO] No Longer Sending Output To Client " + clientID);
         } catch (IOException IOex) {
             System.out.println("[ERROR] Did Not Close Connection Properly");
         }

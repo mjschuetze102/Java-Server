@@ -51,8 +51,6 @@ public class ConnectionHandler extends Thread {
                 // Creates the Input and Output Managers for the client
                 int clientID = ConnectionManager.addOutput(outputStream, socket);
                 (new InputManager(server, inputStream, clientID)).start();
-            } catch (EOFException EOFex) {
-                System.out.println("[INFO] Server Connection Ended");
             } catch (IOException IOex) {
                 System.out.println("[ERROR] Could Not Establish Connection");
             }

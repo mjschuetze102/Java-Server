@@ -44,6 +44,7 @@ public class ConnectionManager {
         try {
             clients.get(clientID).close();
             sockets.get(clientID).close();
+            System.out.println("[INFO] No Longer Sending Output To Client " + clientID);
         } catch (IOException IOex) {
             System.out.println("[ERROR] Did Not Close Connection Properly");
         } finally {

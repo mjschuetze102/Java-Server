@@ -1,6 +1,5 @@
 package Communication;
 
-import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
@@ -50,10 +49,8 @@ public class InputManager extends Thread {
             }
         } catch (ClassNotFoundException CNFex) {
             System.out.println("[ERROR] Could Not Find Message");
-        } catch (EOFException EOFex) {
-            closeConnection();
         } catch (IOException IOex) {
-            System.out.println("[ERROR] Did Not Receive Message Successfully");
+            closeConnection();
         }
     }
 
@@ -73,7 +70,7 @@ public class InputManager extends Thread {
 
         try {
             inputStream.close();
-            System.out.println("[INFO] Successfully Closed Connection");
+            System.out.println("[INFO] No Longer Receiving Input From Client " + clientID);
         } catch (IOException IOex) {
             System.out.println("[ERROR] Did Not Close Connection Properly");
         }
