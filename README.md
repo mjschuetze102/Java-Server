@@ -11,4 +11,5 @@ An easy to use server to get your code up and running fast
    - This is a Map containing whatever you want to send
    - int[] clients is a list of the unique identifiers given to each client
 
+## A look under the hood
 ![uml](https://user-images.githubusercontent.com/16418232/53384456-f86f8f00-3948-11e9-85ff-6fba3ffc457f.PNG "Design")
