@@ -15,7 +15,7 @@ Have a suggestion? Feel free to open a new issue.
 5. Call sendMessage(HashMap<String, Object> messageContents) for client
    - This is a Map containing whatever you want to send
    
-##### Sample code can be found at [src/Sample] (https://github.com/mjschuetze102/Java-Server/tree/master/src/Sample)
+##### Sample code can be found at [src/Sample](https://github.com/mjschuetze102/Java-Server/tree/master/src/Sample)
 
 ## A look under the hood
 ![uml](https://user-images.githubusercontent.com/16418232/53384456-f86f8f00-3948-11e9-85ff-6fba3ffc457f.PNG "Design")
