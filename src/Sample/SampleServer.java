@@ -29,7 +29,7 @@ public class SampleServer extends Server {
      * @param clientID - unique identifier for who sent the message
      */
     @Override
-    public void receiveMessage(HashMap<String, Object> messageContents, int clientID) {
+    public synchronized void receiveMessage(HashMap<String, Object> messageContents, int clientID) {
         // Initialize the message to send
         HashMap<String, Object> newMessage = new HashMap<>();
 
